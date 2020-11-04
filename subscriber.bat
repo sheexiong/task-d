@@ -1,0 +1,1 @@
+docker run --rm -i -t --name=subscriber --network=task-d_default bitnami/kafka /bin/bash
