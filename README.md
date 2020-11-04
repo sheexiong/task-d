@@ -7,6 +7,7 @@ The task is only tested on Windows platform, so I can only gurantee it will work
 ## Notes
 - You will be required to use 3 terminals to test this task, which are **setup-terminal**, **publisher-terminal** and **subscriber-terminal**.
 - All of the terminals should at the root directory `task-d`.
+- The container created by **publisher-terminal** and **subscriber-terminal** will auto destroy after exit the terminal.
 
 ## Setup
 1. You are required to download and install [Docker Desktop](https://www.docker.com/products/docker-desktop).
@@ -15,7 +16,7 @@ The task is only tested on Windows platform, so I can only gurantee it will work
 4. Open **setup-terminal** and run **docker-compose up -d**.
 5. Now open the Desktop Docker to verify 1 zookeeper and 3 kafka container are created and running as shown in Figure 1.
 
-    ![Figure 1](images/figure1.jpg)
+    ![Figure 1](images/figure1.jpg)\
     *Figure 1*
 
 6. Open **publisher-terminal** and run `publisher.bat` windows batch file.
@@ -27,7 +28,7 @@ The task is only tested on Windows platform, so I can only gurantee it will work
 10. We can verify the topic is created successfully by using **publisher-terminal** to run `kafka-topics.sh --zookeeper zookeeper:2181 --list`.
     - There is only "newtopic" which just created by us in the topic list.
 11. We can check which kafka is assigned to leader by using **publisher-terminal** to run `kafka-topics.sh --describe --zookeeper zookeeper:2181 --topic newtopic` as shown in Figure 2.
-    ![Figure 2](images/figure2.jpg)
+    ![Figure 2](images/figure2.jpg)\
     *Figure 2: Note that id for kafka1, kafka2 and kafka3 are **1, 2 and 3** respectively.*
 12. In my case, the leader for this partition is kafka2 (Leader: **2**).
 
@@ -54,7 +55,7 @@ This instruction will continue from [Run Task D](##Run-Task-D) section. Please d
 4. You might notice after running the step 3 command, both terminals will show the warning about unable resolve the server kafka2:9092, but this does not affect the functionally of the message system.
 5. We can use the **publisher-terminal** to publish new message and observe that the **subscriber-terminal** will receive the message afterward.
 6. Now lets use `CTRL + C` to exit publishing mode in **publisher-terminal** and run `kafka-topics.sh --describe --zookeeper zookeeper:2181 --topic newtopic` to see the new leader.
-    ![Figure 3](images/figure3.jpg)
+    ![Figure 3](images/figure3.jpg)\
     Note that the new leader now is kafka3 (Leader: **3**).
 7. You can exit the both terminals by using `CTRL + D`. After exit **publisher-terminal** and **subscriber-terminal**, the respective container will auto destroy.
 
